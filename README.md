@@ -45,6 +45,7 @@ Scenario GET request
 -----------------------
 URL: http://localhost:5050/product/13860428 
 method: GET  
+
 JSON Response returned  
 `{  
 	"id": 13860428  
@@ -66,7 +67,7 @@ Set raw payload to:
 	"value": "99.99",  
 	"currency_code": "USD"  
 }`  
-Click button: SEND  
+
 It will return the updated Price with Product Details  
 
 
@@ -84,7 +85,7 @@ Scenario GET Request on product with no pricing
 --------------------------------------------------
 URL: http://localhost:5050/product/52782530 
 METHOD: GET  
-Click button: SEND  
+
 JSON Response returned  
 `{
      "errorMessage": "My Retail Error for product id=52782530 while getting Price Data"
