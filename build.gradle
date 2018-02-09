@@ -19,9 +19,6 @@ dependencies {
     compile 'com.datastax.cassandra:cassandra-driver-mapping:3.4.0'
     compile 'org.hdrhistogram:HdrHistogram:2.1.10'
     compile 'commons-io:commons-io:2.6'
-    runtime 'org.apache.logging.log4j:log4j-slf4j-impl:2.0.2'
-    runtime 'org.apache.logging.log4j:log4j-api:2.0.2'
-    runtime 'org.apache.logging.log4j:log4j-core:2.0.2'
     compile ratpack.dependency('spring-boot')
     testCompile 'org.cassandraunit:cassandra-unit:3.3.0.2'
     testCompile 'cglib:cglib-nodep:3.2.6'

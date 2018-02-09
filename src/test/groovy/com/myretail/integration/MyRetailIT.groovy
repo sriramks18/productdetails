@@ -33,6 +33,7 @@ class MyRetailIT extends Specification {
     System.setProperty('ratpack.cassandraConfig.keyspace', 'product')
     System.setProperty('ratpack.cassandraConfig.seeds', '127.0.0.1:9142')
     System.setProperty('ratpack.cassandraConfig.clustername', 'Test Cluster')
+    System.setProperty('ratpack.cassandraConfig.createKeySpaceIfNotExists', 'false')
   }
 
   void cleanup() {

@@ -1,6 +1,7 @@
 package com.myretail.service
 
 import com.datastax.driver.core.*
+import com.datastax.driver.core.exceptions.InvalidQueryException
 import com.datastax.driver.core.policies.DCAwareRoundRobinPolicy
 import com.datastax.driver.core.policies.PercentileSpeculativeExecutionPolicy
 import com.datastax.driver.core.policies.TokenAwarePolicy
@@ -57,6 +58,13 @@ class CassandraService implements Service {
     cluster = builder.build()
 
     if (cassandraConfig.keyspace != null) {
+      if(cassandraConfig.createKeySpaceIfNotExists) {
+        log.info("Trying to Create keyspace=${cassandraConfig.keyspace}")
+        session = cluster.connect()
+        session.execute("CREATE KEYSPACE IF NOT EXISTS ${cassandraConfig.keyspace} WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 }")
+        session.execute("CREATE TABLE IF NOT EXISTS ${cassandraConfig.keyspace}.price (PARTITION_ID int,PRD_ID int,VALUE double,CURRENCY_CODE text,PRIMARY KEY (PARTITION_ID, PRD_ID))")
+      }
+      log.info("Successfully created keyspace=${cassandraConfig.keyspace} and table=Price")
       session = cluster.connect(cassandraConfig.keyspace)
     } else {
       session = cluster.connect()

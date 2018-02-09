@@ -8,6 +8,11 @@ class CassandraConfig {
 
   String keyspace
 
+  void setCreateKeySpaceIfNotExists(String createKeySpaceIfNotExists) {
+    this.createKeySpaceIfNotExists = Boolean.parseBoolean(createKeySpaceIfNotExists)
+  }
+  boolean createKeySpaceIfNotExists
+
   List<String> seeds
 
   void setSeeds(String seedString) {
