@@ -5,11 +5,8 @@ import com.google.inject.Inject
 import com.myretail.domain.Price
 import com.myretail.domain.Product
 import com.myretail.service.ProductService
-import io.netty.handler.codec.http.HttpResponseStatus
 import ratpack.exec.Promise
 import ratpack.groovy.handling.GroovyChainAction
-import ratpack.http.Status
-import ratpack.http.internal.DefaultStatus
 
 import static ratpack.jackson.Jackson.fromJson
 import static ratpack.jackson.Jackson.json

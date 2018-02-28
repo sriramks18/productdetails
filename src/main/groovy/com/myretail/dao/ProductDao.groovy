@@ -7,18 +7,11 @@ import com.myretail.config.ProductConfig
 import com.myretail.domain.Product
 import com.myretail.exception.MyRetailException
 import com.myretail.exception.MyRetailExceptionEnum
-import io.netty.util.CharsetUtil
-import ratpack.exec.Blocking
-import ratpack.exec.Downstream
 import ratpack.exec.Promise
-import ratpack.exec.Upstream
 import ratpack.func.Action
-import ratpack.func.Factory
-import ratpack.func.Function
 import ratpack.http.Status
 import ratpack.http.client.HttpClient
 import ratpack.http.client.HttpClientSpec
-import ratpack.http.client.ReceivedResponse
 import ratpack.http.client.RequestSpec
 import ratpack.service.Service
 
@@ -59,15 +52,13 @@ class ProductDao implements Service {
     }
     String url = host + getProductDataPath + id
     URI uri = new URI(url + "?" + getProductParams)
-    return productDetailsHttpClient.get(uri, requestHeaders).<Product> flatMap { receivedResponse ->
-      return Blocking.get {
+    return productDetailsHttpClient.get(uri, requestHeaders).<Product> map { receivedResponse ->
         if (receivedResponse.status == Status.OK) {
           mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true)
           return mapper.readValue(receivedResponse.body.text, Product.class)
         } else {
           throw new MyRetailException(MyRetailExceptionEnum.CHECKED, "My Retail Error for product id=${id} while getting Product Data ")
         }
-      }
     }
 
   }
